@@ -15,7 +15,6 @@ class C45 {
 
 	public static void main(String[] args)  throws Exception {
 		///Reading ARFF File
-		System.out.println("teste");
 		BufferedReader reader = new BufferedReader( new FileReader ("./HTRU_2.arff"));
 		Instances data = new Instances(reader);
 		reader.close();
@@ -41,7 +40,7 @@ class C45 {
 		J48 tree = new J48();         // new instance of tree
 		tree.setOptions(options);     // set the options
 		tree.buildClassifier(data);   // build classifier
-		System.out.println("Graph:\n\n"+tree.graph()+"\n\n\n\n");
+		//System.out.println("Graph:\n\n"+tree.graph()+"\n\n\n\n");
 		//System.out.println("Algorithm described in the Tree:\n\n"+tree.toSource()+"\n\n\n\n");
 
 		//Evaluation
