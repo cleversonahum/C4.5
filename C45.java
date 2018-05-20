@@ -32,7 +32,12 @@ class C45 {
 
 		//Classifier
 		String[] options = new String[1];
-		options[0] = "-U";            // unpruned tree
+		//Valid parameters options (for prunning):
+                //"-U" unpruned tree
+                //"-C <pruning confidence>" Set confidence threshold for pruning.
+                //(default 0.25)
+                //"-R" Use reduced error pruning.
+		options[0] = "-U";       
 		J48 tree = new J48();         // new instance of tree
 		tree.setOptions(options);     // set the options
 		tree.buildClassifier(data);   // build classifier
