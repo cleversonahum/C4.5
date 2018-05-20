@@ -23,15 +23,6 @@ class C45 {
 		reader.close();
 		data.setClassIndex(data.numAttributes() - 1); //Atrribute that indicate the result
 
-		//Pré-processing Database
-		//String[] options = new String[2];
-		//options[0] = "-R";                                    // "range"
-		//options[1] = "1";                                     // first attribute
-		//Remove remove = new Remove();                         // new instance of filter
-		//remove.setOptions(options);                           // set options
-		//remove.setInputFormat(data);                          // inform filter about dataset **AFTER** setting options
-		//Instances newData = Filter.useFilter(data, remove);   // apply filter
-
 		//Classifier
 		String[] options = new String[1];
 		//Valid parameters options (for prunning):
@@ -56,14 +47,10 @@ class C45 {
 				options[0] = "-U";
 				break;
 		}
-		//options[0] = "-U";       
 		J48 tree = new J48();         // new instance of tree
 		tree.setOptions(options);     // set the options
 		tree.buildClassifier(data);   // build classifier
-		System.out.println("OPTIONS:\n"+tree.listOptions());
-		System.out.println("Tree Infos\n======\nLeaves Number: "+tree.measureNumLeaves()+"\nRules Number: "+tree.measureNumRules()+"\nTree Size: "+tree.measureTreeSize());
-		//System.out.println("Graph:\n\n"+tree.graph()+"\n\n\n\n");
-		//System.out.println("Algorithm described in the Tree:\n\n"+tree.toSource()+"\n\n\n\n");
+		System.out.println("Tree Infos\n======\nLeaves Number: "+tree.measureNumLeaves()+"\nTree Size: "+tree.measureTreeSize());
 
 		//Evaluation
 		//Using Cross-Validation
