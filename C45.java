@@ -40,6 +40,7 @@ class C45 {
 		J48 tree = new J48();         // new instance of tree
 		tree.setOptions(options);     // set the options
 		tree.buildClassifier(data);   // build classifier
+		System.out.println("Tree Infos\n======\nLeaves Number: "+tree.measureNumLeaves()+"\nRules Number: "+tree.measureNumRules()+"\nTree Size: "+tree.measureTreeSize());
 		//System.out.println("Graph:\n\n"+tree.graph()+"\n\n\n\n");
 		//System.out.println("Algorithm described in the Tree:\n\n"+tree.toSource()+"\n\n\n\n");
 
