@@ -1,27 +1,15 @@
-MPI=mpic++
-FLAGS=-fopenmp -O3
+COMP=javac
+RUN=java
+FLAGS_COMP=-cp ./weka.jar
+FLAGS_RUN=-cp .:weka.jar C45 HTRU_2.arff
+OPTION = 1
+all: c45 
 
-all: se lu matrix buildMatrix
+c45: C45.java
+	$(COMP) $(FLAGS_COMP) C45.java
 
-#SE
-se: se.cpp
-	$(MPI) -o se se.cpp $(FLAGS)
-
-#LU
-lu: lu.cpp
-	$(MPI) -o lu lu.cpp $(FLAGS) 
-#Matrix
-matrix: matrixGenerator.cpp
-	g++ -o matrixGenerator matrixGenerator.cpp -O3
-
-buildMatrix:
-	./matrixGenerator matrix1.csv 1000
-	./matrixGenerator matrix2.csv 2000
-	./matrixGenerator matrix3.csv 3000
-	./matrixGenerator matrix4.csv 4000
-	./matrixGenerator matrix5.csv 5000
-	./matrixGenerator matrix6.csv 6000
-
+run: C45.class
+	$(RUN) $(FLAGS_RUN) $(OPTION)
 
 clean:
-	rm se lu matrixGenerator matrix{1..6}.csv
+	rm *.class
