@@ -14,8 +14,11 @@ import java.awt.BorderLayout;
 class C45 {
 
 	public static void main(String[] args)  throws Exception {
+		String filename = args[0];
+		Integer option = Integer.parseInt(args[1]);
+
 		///Reading ARFF File
-		BufferedReader reader = new BufferedReader( new FileReader ("./HTRU_2.arff"));
+		BufferedReader reader = new BufferedReader( new FileReader (filename));
 		Instances data = new Instances(reader);
 		reader.close();
 		data.setClassIndex(data.numAttributes() - 1); //Atrribute that indicate the result
@@ -36,10 +39,28 @@ class C45 {
                 //"-C <pruning confidence>" Set confidence threshold for pruning.
                 //(default 0.25)
                 //"-R" Use reduced error pruning.
-		options[0] = "-U";       
+		switch(option) {
+			case 1: //Unprunned Tree
+				options[0] = "-U";
+				System.out.println("Unprunned Tree");
+				break;
+			case 2: //Prunning confidence threshould of 0.25
+				options[0] = ""; //Confidence threshould is a default value to non-unprunned trees 
+				System.out.println("Prunned Tree - Confidence Threshould=0.25");
+				break;
+			case 3: //Reduced Error Pruning
+				options[0] = "-R";
+				System.out.println("Prunned Tree - Reduced Error Prunning");
+				break;
+			default: //Default value is Unprunned Tree
+				options[0] = "-U";
+				break;
+		}
+		//options[0] = "-U";       
 		J48 tree = new J48();         // new instance of tree
 		tree.setOptions(options);     // set the options
 		tree.buildClassifier(data);   // build classifier
+		System.out.println("OPTIONS:\n"+tree.listOptions());
 		System.out.println("Tree Infos\n======\nLeaves Number: "+tree.measureNumLeaves()+"\nRules Number: "+tree.measureNumRules()+"\nTree Size: "+tree.measureTreeSize());
 		//System.out.println("Graph:\n\n"+tree.graph()+"\n\n\n\n");
 		//System.out.println("Algorithm described in the Tree:\n\n"+tree.toSource()+"\n\n\n\n");
